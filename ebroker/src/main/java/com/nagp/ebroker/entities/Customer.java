@@ -20,7 +20,7 @@ public class Customer {
 
 	String name;
 
-	Double walletAmount;
+	double walletAmount;
 
 	public int getId() {
 		return id;
@@ -38,11 +38,11 @@ public class Customer {
 		this.equities = equities;
 	}
 
-	public Double getWalletAmount() {
+	public double getWalletAmount() {
 		return walletAmount;
 	}
 
-	public void setWalletAmount(Double walletAmount) {
+	public void setWalletAmount(double walletAmount) {
 		this.walletAmount = walletAmount;
 	}
 

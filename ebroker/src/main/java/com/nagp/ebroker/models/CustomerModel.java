@@ -4,7 +4,7 @@ public class CustomerModel {
 
 	String name;
 
-	Double walletAmount;
+	double walletAmount;
 
 	public String getName() {
 		return name;
@@ -14,11 +14,11 @@ public class CustomerModel {
 		this.name = name;
 	}
 
-	public Double getWalletAmount() {
+	public double getWalletAmount() {
 		return walletAmount;
 	}
 
-	public void setWalletAmount(Double walletAmount) {
+	public void setWalletAmount(double walletAmount) {
 		this.walletAmount = walletAmount;
 	}
 

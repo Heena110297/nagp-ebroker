@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.nagp.ebroker.entities.Customer;
+import com.nagp.ebroker.entities.Equity;
 import com.nagp.ebroker.models.BaseResponse;
 import com.nagp.ebroker.services.EBrokerService;
 
@@ -116,7 +117,7 @@ public class EBrokerControllerTest {
 	@Test
 	public void shouldSaveCustomer() throws Exception {
 		Customer customer = new Customer();
-		customer.setWalletAmount((double) 5000);
+		customer.setWalletAmount(5000.0);
 		customer.setName("Heena");
 		BaseResponse baseResponse = new BaseResponse();
 		baseResponse.setMessage("DONE");
@@ -127,6 +128,38 @@ public class EBrokerControllerTest {
 				.content("{\r\n" + "    \"name\":\"Heena\",\r\n" + "    \"wallet_amount\":5000\r\n" + "}"))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.content().string(
-						"{\"status\":\"SUCCESS\",\"message\":\"Customer saved successfully\",\"customer\":{\"id\":0,\"equities\":null,\"name\":\"Heena\",\"walletAmount\":5000.0}}"));
+						"{\"status\":\"SUCCESS\",\"message\":\"Customer saved successfully\"}"));
+	}
+
+	@Test
+	public void shouldDeleteCustomer() throws Exception {
+		Mockito.when(eBrokerService.deleteCustomer(Mockito.any())).thenReturn("SUCCESS");
+		mockMvc.perform(MockMvcRequestBuilders.delete("/customer/1"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.content().string("SUCCESS"));
+	}
+	
+	@Test
+	public void shouldSaveEquity() throws Exception {
+		Equity equity = new Equity();
+		equity.setName("ABC");
+		equity.setNav(1000.0);
+		BaseResponse baseResponse = new BaseResponse();
+		baseResponse.setMessage("DONE");
+		baseResponse.setStatus("SUCCESS");
+		Mockito.when(eBrokerService.addEquity(Mockito.any())).thenReturn(equity);
+		mockMvc.perform(MockMvcRequestBuilders.post("/equity").contentType(MediaType.APPLICATION_JSON)
+				.content("{\r\n" + "    \"name\":\"ABC\",\r\n" + "    \"nav\":1000.0\r\n" + "}"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.content().string(
+						"{\"status\":\"SUCCESS\",\"message\":\"Equity saved successfully\"}"));
+	}
+	
+	@Test
+	public void shouldDeleteEquity() throws Exception {
+		Mockito.when(eBrokerService.deleteEquity(Mockito.any())).thenReturn("SUCCESS");
+		mockMvc.perform(MockMvcRequestBuilders.delete("/equity/1"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.content().string("SUCCESS"));
 	}
 }

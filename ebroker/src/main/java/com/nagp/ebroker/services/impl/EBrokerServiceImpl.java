@@ -14,6 +14,7 @@ import com.nagp.ebroker.entities.Customer;
 import com.nagp.ebroker.entities.Equity;
 import com.nagp.ebroker.models.BaseResponse;
 import com.nagp.ebroker.models.CustomerModel;
+import com.nagp.ebroker.models.EquityModel;
 import com.nagp.ebroker.repositories.CustomerRepository;
 import com.nagp.ebroker.repositories.EquityRepository;
 import com.nagp.ebroker.services.EBrokerService;
@@ -121,6 +122,25 @@ public class EBrokerServiceImpl implements EBrokerService {
 		Customer customerEntity = new Customer();
 		BeanUtils.copyProperties(customer, customerEntity);
 		return customerRepo.save(customerEntity);
+	}
+
+	@Override
+	public String deleteCustomer(Integer id) {
+		customerRepo.deleteById(id);
+		return "SUCCESS";
+	}
+
+	@Override
+	public Equity addEquity(EquityModel equityModel) {
+		Equity equity = new Equity();
+		BeanUtils.copyProperties(equityModel, equity);
+		return equityRepo.save(equity);
+	}
+	
+	@Override
+	public String deleteEquity(Integer id) {
+		equityRepo.deleteById(id);
+		return "SUCCESS";
 	}
 
 }

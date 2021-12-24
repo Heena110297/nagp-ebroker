@@ -1,11 +1,14 @@
 package com.nagp.ebroker.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nagp.ebroker.entities.Customer;
 
 public class BaseResponse {
 
 	String status;
 	String message;
+	
+	@JsonIgnore
 	Customer customer;
 
 	public String getStatus() {

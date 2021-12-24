@@ -22,6 +22,7 @@ import com.nagp.ebroker.entities.Customer;
 import com.nagp.ebroker.entities.Equity;
 import com.nagp.ebroker.models.BaseResponse;
 import com.nagp.ebroker.models.CustomerModel;
+import com.nagp.ebroker.models.EquityModel;
 import com.nagp.ebroker.repositories.CustomerRepository;
 import com.nagp.ebroker.repositories.EquityRepository;
 import com.nagp.ebroker.utils.Helper;
@@ -281,5 +282,27 @@ public class EBrokerServiceImplTest {
 		Mockito.when(customerRepo.save(Mockito.any())).thenReturn(new Customer());
 		Customer savedCustomer = eBrokerService.addCustomer(customer);
 		assertNotNull(savedCustomer);
+	}
+
+	@Test
+	public void shouldDeleteCustomer() {
+		String resp = eBrokerService.deleteCustomer(1);
+		assertNotNull(resp);
+	}
+
+	@Test
+	public void shouldSaveEquity() {
+		EquityModel equity = new EquityModel();
+		equity.setName("name");
+		equity.setNav(100.0);
+		Mockito.when(equityRepo.save(Mockito.any())).thenReturn(new Equity());
+		Equity savedEquity = eBrokerService.addEquity(equity);
+		assertNotNull(savedEquity);
+	}
+
+	@Test
+	public void shouldDeleteEquity() {
+		String resp = eBrokerService.deleteEquity(1);
+		assertNotNull(resp);
 	}
 }
