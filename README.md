@@ -1,5 +1,7 @@
 # nagp-ebroker
+![image](https://github.com/Heena110297/nagp-ebroker/blob/master/coverage.PNG)
 
-![Uploading image.png…]()
+![image](https://github.com/Heena110297/nagp-ebroker/blob/master/44_unit_tests.PNG)
+
 
 
